@@ -54,7 +54,8 @@ def recognize_face(img_name,show_img=False):
 
                 #set name which has highest count
                 name = max(counts, key=counts.get)
-                
+            
+            print(names)
             # loop over the recognized faces
             for ((x, y, w, h), name) in zip(faces, names):
                 # rescale the face coordinates
@@ -79,5 +80,5 @@ def recognize_face(img_name,show_img=False):
         cv2.waitKey(0)
         cv2.destroyAllWindows()
     return names
-    
+
 recognize_face("pn.jpg")
