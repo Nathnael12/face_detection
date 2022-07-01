@@ -2,19 +2,25 @@ from pyclbr import Function
 import face_recognition
 import pickle
 import cv2
+import os
+import sys
 
+
+
+# .append(os.path.abspath(os.path.join('../data_set')))
+file_path=os.path.dirname(os.path.realpath(__file__))
 #find path of xml file containing haarcascade file
-cascPathface = "./data_set/haarcascade_frontalface_alt2.xml"
+cascPathface = file_path + "/data_set/haarcascade_frontalface_alt2.xml"
 # load the harcaascade in the cascade classifier
 faceCascade = cv2.CascadeClassifier(cascPathface)
 # load the known faces and embeddings saved in last file
-data = pickle.loads(open('./data_set/face_enc', "rb").read())
+data = pickle.loads(open(file_path+'/data_set/face_enc', "rb").read())
 #Find path to the image you want to detect face and pass it here
 
 
 def recognize_face(img_name,show_img=False):
     global image
-    path="./test/"
+    path=file_path +"/test/"
     image = cv2.imread(path+img_name)
     global rgb
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -81,4 +87,5 @@ def recognize_face(img_name,show_img=False):
         cv2.destroyAllWindows()
     return names
 
-recognize_face("pn.jpg")
+recognize_face(sys.argv)
+exit()
