@@ -17,7 +17,6 @@ faceCascade = cv2.CascadeClassifier(cascPathface)
 data = pickle.loads(open(file_path+'/data_set/face_enc', "rb").read())
 #Find path to the image you want to detect face and pass it here
 
-
 def recognize_face(img_name,show_img=False):
     global image
     path=file_path +"/test/"
@@ -29,7 +28,7 @@ def recognize_face(img_name,show_img=False):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     global faces
     faces = faceCascade.detectMultiScale(gray,scaleFactor=1.1,minNeighbors=5,minSize=(60, 60),flags=cv2.CASCADE_SCALE_IMAGE)
-
+    
     # the facial embeddings for face in input
     encodings = face_recognition.face_encodings(rgb)
     names = []

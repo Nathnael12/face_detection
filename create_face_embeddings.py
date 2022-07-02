@@ -13,8 +13,6 @@ def create_embedding(img_location):
     # img_location="./data_set/Images"
     imagePaths = list(paths.list_images(img_location))
 
-
-
     # loop over the image paths
     for (i, imagePath) in enumerate(imagePaths):
         # extract the person name from the image path
@@ -25,6 +23,7 @@ def create_embedding(img_location):
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         #Use Face_recognition to locate faces
         boxes = face_recognition.face_locations(rgb,model='hog')
+        print(boxes)
         # compute the facial embedding for the face
         encodings = face_recognition.face_encodings(rgb, boxes)
         # loop over the encodings
