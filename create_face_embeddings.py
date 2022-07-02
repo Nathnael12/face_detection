@@ -6,7 +6,7 @@ import os
 
 knownEncodings = []
 knownNames = []
-
+file_path=os.path.dirname(os.path.realpath(__file__))
 def create_embedding(img_location):
     #get paths of each file in folder named Images
     #Images here contains my data(folders of various persons)
@@ -35,8 +35,8 @@ def create_embedding(img_location):
     #save encodings along with their names in dictionary data
     data = {"encodings": knownEncodings, "names": knownNames}
     #use pickle to save data into a file for later use
-    f = open("./data_set/face_enc", "wb")
+    f = open(file_path+"/data_set/face_enc", "wb")
     f.write(pickle.dumps(data))
     f.close()
 
-create_embedding("./data_set/Images")
+create_embedding(file_path+"/data_set/Images")

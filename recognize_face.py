@@ -87,5 +87,5 @@ def recognize_face(img_name,show_img=False):
         cv2.destroyAllWindows()
     return names
 
-recognize_face(sys.argv)
+recognize_face(sys.argv[-1])
 exit()
