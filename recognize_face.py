@@ -5,7 +5,9 @@ import cv2
 import os
 import sys
 
-
+if len(sys.argv) < 2:
+    print("no sufficient arguments were given")
+    exit()
 
 # .append(os.path.abspath(os.path.join('../data_set')))
 file_path=os.path.dirname(os.path.realpath(__file__))
@@ -17,10 +19,9 @@ faceCascade = cv2.CascadeClassifier(cascPathface)
 data = pickle.loads(open(file_path+'/data_set/face_enc', "rb").read())
 #Find path to the image you want to detect face and pass it here
 
-def recognize_face(img_name,show_img=False):
+def recognize_face(img_path,show_img=False):
     global image
-    path=file_path +"/test/"
-    image = cv2.imread(path+img_name)
+    image = cv2.imread(img_path)
     global rgb
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     #convert image to Greyscale for haarcascade
@@ -75,7 +76,7 @@ def recognize_face(img_name,show_img=False):
                 cv2.putText(image, name, (x, y+h-10), cv2.FONT_HERSHEY_SIMPLEX, 1.7, (255, 255, 255), 2)
 
     if show_img:
-        scale_percent = 30 # percent of original size
+        scale_percent = 60 # percent of original size
         width = int(image.shape[1] * scale_percent / 100)
         height = int(image.shape[0] * scale_percent / 100)
         dim = (width, height)

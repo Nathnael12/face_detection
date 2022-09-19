@@ -1,12 +1,19 @@
+import sys
 from imutils import paths
 import face_recognition
 import pickle
 import cv2
 import os
 
+if len(sys.argv) < 2:
+    print("no sufficient arguments were given")
+    exit()
+
+img_path=sys.argv[-1]
 knownEncodings = []
 knownNames = []
 file_path=os.path.dirname(os.path.realpath(__file__))
+
 def create_embedding(img_location):
     #get paths of each file in folder named Images
     #Images here contains my data(folders of various persons)
@@ -23,7 +30,7 @@ def create_embedding(img_location):
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         #Use Face_recognition to locate faces
         boxes = face_recognition.face_locations(rgb,model='hog')
-        print(boxes)
+        # print(boxes)
         # compute the facial embedding for the face
         encodings = face_recognition.face_encodings(rgb, boxes)
         # loop over the encodings
@@ -38,4 +45,5 @@ def create_embedding(img_location):
     f.write(pickle.dumps(data))
     f.close()
 
-create_embedding(file_path+"/data_set/Images")
+create_embedding(img_path)
+# create_embedding(file_path+"/data_set/Images")
